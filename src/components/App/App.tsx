@@ -34,11 +34,12 @@ export default function App() {
         toast("No movies found for your request.");
       }
       setMovies(results);
-    } catch (err: any) {
-      if (err?.name !== "CanceledError" && err?.name !== "AbortError") {
-        setError("fetch_error");
-      }
-    } finally {
+    } catch (err: unknown) {
+   if (isAxiosError(err) && err.code === "ERR_CANCELED") {
+     return;
+   }
+   setError("fetch_error");
+ } finally {
       setLoading(false);
     }
   }, []);
