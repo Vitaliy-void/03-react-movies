@@ -1,4 +1,4 @@
-import { FormEvent } from "react";
+import type { FormEvent } from "react";
 import toast from "react-hot-toast";
 import css from "./SearchBar.module.css";
 
@@ -34,7 +34,7 @@ export default function SearchBar({ onSubmit }: SearchBarProps) {
           Powered by TMDB
         </a>
 
-        {/* Form Actions: використовуємо нативний submit + FormData */}
+        {}
         <form className={css.form} onSubmit={handleSubmit}>
           <input
             className={css.input}
