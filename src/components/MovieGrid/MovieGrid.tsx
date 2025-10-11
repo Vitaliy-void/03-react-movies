@@ -12,25 +12,29 @@ export default function MovieGrid({ movies, onSelect }: MovieGridProps) {
 
   return (
     <ul className={css.grid}>
-      {movies.map((m) => (
-        <li key={m.id}>
-          <div className={css.card} onClick={() => onSelect(m)} role="button">
-           + {(() => {
-   const imgSrc =
-     tmdbImg(m.poster_path, "w500") ?? tmdbImg(m.backdrop_path, "w500");
-   return (
-     <img
-       className={css.image}
-       src={imgSrc ?? undefined}  // <— не буде атрибута src, якщо немає URL
-       alt={m.title}
-       loading="lazy"
-     />
-   );
- })()}
-            <h2 className={css.title}>{m.title}</h2>
-          </div>
-        </li>
-      ))}
+      {movies.map(m => {
+  const imgSrc =
+    tmdbImg(m.poster_path, "w500") ?? tmdbImg(m.backdrop_path, "w500");
+
+  return (
+    <li key={m.id}>
+      <div className={css.card} onClick={() => onSelect(m)} role="button">
+        {imgSrc ? (
+          <img
+            className={css.image}
+            src={imgSrc}
+            alt={m.title}
+            loading="lazy"
+          />
+        ) : (
+          // або не рендерити нічого: null
+          <div className={css.imageFallback} aria-label="No image available" />
+        )}
+        <h2 className={css.title}>{m.title}</h2>
+      </div>
+    </li>
+  );
+})}
     </ul>
   );
-}
+}   

@@ -41,7 +41,10 @@ export async function fetchMovies(query: string, signal?: AbortSignal): Promise<
   return data.results;
 }
 
-export function tmdbImg(path: string | null, size: "w500" | "original" = "w500") {
-  if (!path) return "";
-  return `https://image.tmdb.org/t/p/${size}${path}`;
+export function tmdbImg(
+  path: string | null,
+  size: "w500" | "original" = "w500"
+): string | null {
+  return path ? `https://image.tmdb.org/t/p/${size}${path}` : null;
 }
+
