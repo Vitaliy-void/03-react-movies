@@ -44,7 +44,7 @@ export async function fetchMovies(query: string, signal?: AbortSignal): Promise<
 export function tmdbImg(
   path: string | null,
   size: "w500" | "original" = "w500"
-): string | null {
-  return path ? `https://image.tmdb.org/t/p/${size}${path}` : null;
+): string | undefined {
+  return path ? `https://image.tmdb.org/t/p/${size}${path}` : undefined;
 }
 
