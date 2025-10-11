@@ -15,12 +15,18 @@ export default function MovieGrid({ movies, onSelect }: MovieGridProps) {
       {movies.map((m) => (
         <li key={m.id}>
           <div className={css.card} onClick={() => onSelect(m)} role="button">
-            <img
-              className={css.image}
-              src={tmdbImg(m.poster_path, "w500") || tmdbImg(m.backdrop_path, "w500")}
-              alt={m.title}
-              loading="lazy"
-            />
+           + {(() => {
+   const imgSrc =
+     tmdbImg(m.poster_path, "w500") ?? tmdbImg(m.backdrop_path, "w500");
+   return (
+     <img
+       className={css.image}
+       src={imgSrc ?? undefined}  // <— не буде атрибута src, якщо немає URL
+       alt={m.title}
+       loading="lazy"
+     />
+   );
+ })()}
             <h2 className={css.title}>{m.title}</h2>
           </div>
         </li>
